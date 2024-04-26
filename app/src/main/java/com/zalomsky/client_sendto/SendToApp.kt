@@ -44,3 +44,4 @@ fun sendGetRequest(url: String): String {
     val response: Response = client.newCall(request).execute()
     return response.body?.string() ?: ""
 }
+
