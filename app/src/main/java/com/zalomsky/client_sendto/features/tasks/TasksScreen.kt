@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.features.base
+package com.zalomsky.client_sendto.features.tasks
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -11,8 +11,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,29 +19,33 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.zalomsky.client_sendto.R
-import com.zalomsky.client_sendto.common.SendToButton
-import com.zalomsky.client_sendto.common.SendToTwoListItem
+import com.zalomsky.client_sendto.common.SendToTaskListItem
 import com.zalomsky.client_sendto.common.floatingButtonColor
-import com.zalomsky.client_sendto.common.pdfIcon
+import com.zalomsky.client_sendto.common.plus
 import com.zalomsky.client_sendto.common.rubikMedium
 import com.zalomsky.client_sendto.common.textColor
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
+data class Task(
+    val id: Int,
+    val name: String,
+    val date: String,
+    val time: String,
+    val status: Boolean
+)
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun BaseScreen(
-    toAddClientScreen: () -> Unit,
+fun TaskScreen(
+    onTaskAdd: () -> Unit,
+    onTaskEdit: () -> Unit
 ) {
 
-    val headerText = " \"ЭйчТиСофт\""
+    val taskList = mutableListOf<Task>()
+    taskList.add(Task(1, "Сделать коммит", "30.04.2024", "15.00", true))
+    taskList.add(Task(1, "Выполнить указания", "30.04.2024", "15.00", true))
+    taskList.add(Task(1, "Нанять сотрудника", "30.04.2024", "15.00", false))
 
-    val viewModel: BaseViewModel = hiltViewModel()
-    val clients = viewModel.clients.observeAsState(listOf()).value
-
-    LaunchedEffect(Unit) {
-       viewModel.getClientsList()
-    }
 
     Scaffold(
         backgroundColor = Color.White,
@@ -52,10 +54,10 @@ fun BaseScreen(
             .padding(bottom = 56.dp),
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {  },
+                onClick = onTaskAdd,
                 backgroundColor = floatingButtonColor
             ) {
-                Icon(painter = painterResource(id = pdfIcon), contentDescription = "")
+                Icon(painter = painterResource(id = plus), contentDescription = "")
             }
         }
     ) {
@@ -66,8 +68,10 @@ fun BaseScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
+            val companyName = " \"ЭйчТиСофт\""
+
             Text(
-                text = stringResource(id = R.string.clientBase) + headerText,
+                text = stringResource(id = R.string.tasks) + companyName,
                 fontSize = 15.sp,
                 fontWeight = FontWeight(300),
                 color = textColor,
@@ -76,14 +80,12 @@ fun BaseScreen(
             )
 
             LazyColumn(
-                modifier = Modifier.padding(top = 20.dp)
+                modifier = Modifier.padding(top = 20.dp),
             ) {
-                items(clients) { client ->
-                    SendToTwoListItem(client = client)
+                items(taskList) { task ->
+                    SendToTaskListItem(task = task, onTaskEdit = onTaskEdit)
                 }
             }
-
-            SendToButton(modifier = Modifier, onClick = toAddClientScreen, textId = R.string.addClient)
         }
     }
 }

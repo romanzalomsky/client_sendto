@@ -5,3 +5,4 @@ import androidx.compose.ui.text.font.FontFamily
 import com.zalomsky.client_sendto.R
 
 val rubikMedium = FontFamily(Font(R.font.rubikmedium))
+val rubiklight = FontFamily(Font(R.font.rubiklight))

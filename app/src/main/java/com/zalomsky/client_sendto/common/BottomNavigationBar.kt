@@ -62,7 +62,7 @@ fun BottomNavigationBar(
                     )
                 },
                 selected = selected,
-                selectedContentColor = Color(0xFF0B9AFA),
+                selectedContentColor = systemColor,
                 unselectedContentColor = Color.Gray,
                 onClick = { navigateToRoute(section.route) }
             )
