@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -15,8 +16,15 @@ import javax.inject.Singleton
 class HiltModule {
 
     @Provides
-    fun provideRetrofit() : Retrofit = Retrofit.Builder()
+    fun provideOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .build()
+    }
+
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient) : Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
         .baseUrl("http://192.168.241.159:8080")
         .build()
 

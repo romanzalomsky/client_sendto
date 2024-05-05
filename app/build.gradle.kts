@@ -55,6 +55,9 @@ android {
 
 dependencies {
 
+    implementation("com.itextpdf:itext7-core:7.1.16")
+
+
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")

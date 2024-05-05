@@ -14,12 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.zalomsky.client_sendto.R
 import com.zalomsky.client_sendto.common.SendToTextField
 import com.zalomsky.client_sendto.common.back
@@ -27,14 +29,23 @@ import com.zalomsky.client_sendto.common.floatingButtonColor
 import com.zalomsky.client_sendto.common.plus
 import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.whiteColor
+import com.zalomsky.client_sendto.domain.models.Client
+import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.util.UUID
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AddClientScreen(
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
 ) {
 
-    val baseViewModel: BaseViewModel
+    val viewModel: BaseViewModel = hiltViewModel()
+    val coroutineScope = rememberCoroutineScope()
+
+    var mail by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -49,8 +60,9 @@ fun AddClientScreen(
                 navigationIcon = {
                     IconButton(
                         onClick = onBackPressed
-                    ){
-                        Icon(painter = painterResource(id = back),
+                    ) {
+                        Icon(
+                            painter = painterResource(id = back),
                             tint = whiteColor,
                             contentDescription = ""
                         )
@@ -62,7 +74,12 @@ fun AddClientScreen(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { },
+                onClick = {
+                    coroutineScope.launch {
+                        val client = Client(id = "", email = mail, phone = phone)
+                        viewModel.addClient(client = client, onSuccess = onBackPressed)
+                    }
+                },
                 backgroundColor = floatingButtonColor
             ) {
                 Icon(painter = painterResource(id = plus), contentDescription = "")
@@ -76,9 +93,6 @@ fun AddClientScreen(
         ) {
 
             val padding = Modifier.padding(horizontal = 30.dp)
-
-            var mail by remember { mutableStateOf("") }
-            var phone by remember { mutableStateOf("") }
 
             SendToTextField(
                 value = mail,
