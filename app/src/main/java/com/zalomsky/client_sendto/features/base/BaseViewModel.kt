@@ -1,5 +1,6 @@
 package com.zalomsky.client_sendto.features.base
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BaseViewModel @Inject constructor(
     private val getClientsUseCase: GetClientsUseCase,
-    private val addClientUseCase: AddClientUseCase,
+    private val addClientUseCase: AddClientUseCase
 ) : ViewModel() {
 
     private val _client = MutableLiveData<Client>()
@@ -28,9 +29,13 @@ class BaseViewModel @Inject constructor(
         get() = _clients
 
     fun getClientsList() {
+
         viewModelScope.launch(Dispatchers.IO) {
-            getClientsUseCase.invoke().let {
-                _clients.postValue(it)
+            try {
+                val clients = getClientsUseCase()
+                _clients.postValue(clients)
+            } catch (e: Exception) {
+                Log.e("asdfghjk", "Exception during request -> ${e.localizedMessage}")
             }
         }
     }

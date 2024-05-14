@@ -1,36 +1,27 @@
 package com.zalomsky.client_sendto.di
 
-import com.zalomsky.client_sendto.api.ClientApi
-import com.zalomsky.client_sendto.api.ClientRemoteData
+import com.zalomsky.client_sendto.service.ClientApiService
+import com.zalomsky.client_sendto.service.UserApiService
+import com.zalomsky.client_sendto.repository.ClientRepository
+import com.zalomsky.client_sendto.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 class HiltModule {
 
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .build()
-    }
+    fun provideClientRepository(clientApiService: ClientApiService): ClientRepository =
+        ClientRepository(clientApiService)
 
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient) : Retrofit = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttpClient)
-        .baseUrl("http://192.168.241.159:8080")
-        .build()
-
-    @Provides
-    fun provideClientApi(retrofit: Retrofit) : ClientApi = retrofit.create(ClientApi::class.java)
-
-    @Provides
-    fun provideClientRemoteData(clientApi: ClientApi) : ClientRemoteData = ClientRemoteData(clientApi)
+    fun provideUserRepository(userApiService: UserApiService): UserRepository =
+        UserRepository(userApiService)
 }

@@ -40,6 +40,8 @@ import com.zalomsky.client_sendto.common.pdfIcon
 import com.zalomsky.client_sendto.common.rubikMedium
 import com.zalomsky.client_sendto.common.textColor
 import com.zalomsky.client_sendto.domain.models.Client
+import com.zalomsky.client_sendto.features.TokenViewModel
+import com.zalomsky.client_sendto.features.auth.AuthViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -52,6 +54,7 @@ fun BaseScreen(
 
     val headerText = " \"ЭйчТиСофт\""
 
+    val tokenViewModel: TokenViewModel = hiltViewModel()
     val viewModel: BaseViewModel = hiltViewModel()
     val clients = viewModel.clients.observeAsState(listOf()).value
 
@@ -59,6 +62,7 @@ fun BaseScreen(
 
     LaunchedEffect(Unit) {
         viewModel.getClientsList()
+        Log.e("jhkkjdd", clients.toString())
     }
 
     Scaffold(

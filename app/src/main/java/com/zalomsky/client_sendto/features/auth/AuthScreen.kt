@@ -1,6 +1,7 @@
 package com.zalomsky.client_sendto.features.auth
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,20 +13,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.zalomsky.client_sendto.R
 import com.zalomsky.client_sendto.common.SendToButton
 import com.zalomsky.client_sendto.common.SendToTextField
 import com.zalomsky.client_sendto.common.rubikMedium
 import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.textColor
+import com.zalomsky.client_sendto.domain.models.LoginRequest
+import com.zalomsky.client_sendto.utils.PreferenceManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -33,13 +41,22 @@ fun AuthScreen(
     toRegistration: () -> Unit,
     onEnter: () -> Unit,
 ) {
+
+    val context = LocalContext.current
+    val preferenceManager = remember { PreferenceManager(context) }
+
     Scaffold(
         backgroundColor = Color.White,
         modifier = Modifier.fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(top = 70.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 70.dp)
         ) {
+
+            val viewModel: AuthViewModel = hiltViewModel()
+            val scope = rememberCoroutineScope()
 
             val padding = Modifier.padding(horizontal = 30.dp)
 
@@ -80,7 +97,16 @@ fun AuthScreen(
             )
             SendToButton(
                 modifier = Modifier,
-                onClick = onEnter,
+                onClick = {
+                    scope.launch(Dispatchers.Main) {
+                        val loginRequest = LoginRequest(
+                            email = mail,
+                            password = password
+                        )
+                        viewModel.getLogin(loginRequest, onEnter)
+                        viewModel.getToken()?.let { it1 -> preferenceManager.saveToken(it1) }
+                    }
+                },
                 textId = R.string.enter
             )
             Row(

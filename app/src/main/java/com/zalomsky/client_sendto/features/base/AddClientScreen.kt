@@ -76,7 +76,7 @@ fun AddClientScreen(
             FloatingActionButton(
                 onClick = {
                     coroutineScope.launch {
-                        val client = Client(id = "", email = mail, phone = phone)
+                        val client = Client(id = "", email = mail, phone = phone, user_id = "")
                         viewModel.addClient(client = client, onSuccess = onBackPressed)
                     }
                 },
