@@ -13,6 +13,12 @@ object MainDestinations {
     const val REGISTRATION_ROUTE = "registration"
     const val AUTH_ROUTE = "auth"
     const val START_ROUTE = "start"
+    const val ADD_CLIENT_ROUTE = "add client"
+    const val ADD_TASK_ROUTE = "add task"
+    const val EDIT_TASK_ROUTE = "edit task"
+    const val ADD_SENDS_ROUTE = "add sends"
+    const val AB_ROUTE = "address book"
+    const val ADD_AB_ROUTE = "add address book"
 }
 
 enum class BaseSections(

@@ -9,4 +9,48 @@
     <string name="registration">Регистрация</string>
     <string name="auth">Авторизация</string>
     <string name="enter">Войти</string>
+
+    <string name="name">SendTo</string>
+    <string name="name1">Войдите в аккаунт</string>
+    <string name="mail">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="name2">Нет аккаунта?</string>
+    <string name="create">Создать</string>
+
+    <string name="createAcc">Создать аккаунт</string>
+    <string name="login">Логин</string>
+    <string name="password2">Повторите пароль</string>
+    <string name="companyName">Название компании</string>
+    <string name="name3">Уже есть аккаунт?</string>
+
+    <string name="clientBase">Клиентская база</string>
+    <string name="addClient">Добавить клиента</string>
+    <string name="addTask">Добавить задачу</string>
+    <string name="task">Задача</string>
+    <string name="date">Дата</string>
+    <string name="time">Время</string>
+    <string name="phone">Телефон</string>
+
+    <string name="naming">Наименование</string>
+    <string name="kind">Вид</string>
+    <string name="type">Тип</string>
+    <string name="utils">Утилиты</string>
+    <string name="getters">Получатели</string>
+    <string name="countOfGetters">Кол-во получателей</string>
+
+    <string name="editTask">Обновить задачу</string>
+
+    <string name="add">Добавить</string>
+    <string name="sort">Сортировать</string>
+    <string name="update">Обновить</string>
+    <string name="addressBook">А.к.</string>
+    <string name="templates">Шаблоны</string>
+    <string name="clients">Клиенты</string>
+
+    <string name="addSends">Добавить рассылку</string>
+    <string name="add1">Добавить вручную</string>
+    <string name="add2">Автоматическая рассылка</string>
+    <string name="sendsText">Текст письма</string>
+    <string name="send">Отправить</string>
+    <string name="addressBook1">Адресные книги</string>
 </resources>
