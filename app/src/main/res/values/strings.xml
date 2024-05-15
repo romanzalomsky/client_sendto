@@ -46,6 +46,7 @@
     <string name="addressBook">А.к.</string>
     <string name="templates">Шаблоны</string>
     <string name="clients">Клиенты</string>
+    <string name="description">Описание</string>
 
     <string name="addSends">Добавить рассылку</string>
     <string name="add1">Добавить вручную</string>

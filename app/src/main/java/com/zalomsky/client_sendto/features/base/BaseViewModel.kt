@@ -1,14 +1,13 @@
 package com.zalomsky.client_sendto.features.base
 
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zalomsky.client_sendto.domain.models.Client
-import com.zalomsky.client_sendto.domain.usecase.AddClientUseCase
-import com.zalomsky.client_sendto.domain.usecase.GetClientsUseCase
+import com.zalomsky.client_sendto.domain.usecase.clients.AddClientUseCase
+import com.zalomsky.client_sendto.domain.usecase.clients.GetClientsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

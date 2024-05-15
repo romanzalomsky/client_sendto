@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.domain.usecase
+package com.zalomsky.client_sendto.domain.usecase.clients
 
 import com.zalomsky.client_sendto.repository.ClientRepository
 import com.zalomsky.client_sendto.domain.models.Client

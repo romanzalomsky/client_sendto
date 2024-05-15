@@ -89,8 +89,8 @@ fun NavGraphBuilder.bottomRoutes(
             onTaskAdd = {
                 navController.navigateToAddTaskScreen()
             },
-            onTaskEdit = {
-                navController.navigateToEditTaskScreen()
+            onTaskEdit = { taskId ->
+                navController.navigateToEditTaskScreen(taskId?: "")
             }
         )
     }
