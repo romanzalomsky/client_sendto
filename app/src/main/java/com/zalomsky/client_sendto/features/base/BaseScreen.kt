@@ -54,7 +54,6 @@ fun BaseScreen(
 
     val headerText = " \"ЭйчТиСофт\""
 
-    val tokenViewModel: TokenViewModel = hiltViewModel()
     val viewModel: BaseViewModel = hiltViewModel()
     val clients = viewModel.clients.observeAsState(listOf()).value
 
@@ -62,7 +61,6 @@ fun BaseScreen(
 
     LaunchedEffect(Unit) {
         viewModel.getClientsList()
-        Log.e("jhkkjdd", clients.toString())
     }
 
     Scaffold(

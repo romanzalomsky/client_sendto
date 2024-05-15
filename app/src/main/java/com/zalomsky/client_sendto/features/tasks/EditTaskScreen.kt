@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.features.tasks.add
+package com.zalomsky.client_sendto.features.tasks
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -11,6 +11,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.zalomsky.client_sendto.R
 import com.zalomsky.client_sendto.common.SendToTextField
 import com.zalomsky.client_sendto.common.back
@@ -27,18 +30,40 @@ import com.zalomsky.client_sendto.common.floatingButtonColor
 import com.zalomsky.client_sendto.common.plus
 import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.whiteColor
+import com.zalomsky.client_sendto.domain.models.Task
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AddTaskScreen(
+fun EditTaskScreen(
+    taskId: String?,
     onBackPressed: () -> Unit
 ) {
+
+    val viewModel: TaskViewModel = hiltViewModel()
+    val task by viewModel.task.collectAsState()
+
+    var taskName by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
+    var date by remember { mutableStateOf("") }
+    var time by remember { mutableStateOf("") }
+
+    LaunchedEffect(Unit) {
+        viewModel.getTaskById(taskId?: "")
+    }
+
+    if (task != null) {
+        taskName = task?.taskName?: ""
+        description = task?.description?: ""
+        date = task?.date?: ""
+        time = task?.time?: ""
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.addTask),
+                        text = stringResource(id = R.string.editTask),
                         color = whiteColor
                     )
                 },
@@ -59,7 +84,18 @@ fun AddTaskScreen(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { },
+                onClick = {
+                    val taskUpdated = Task(
+                        id = "",
+                        taskName = taskName,
+                        description = description,
+                        date = date,
+                        time = time,
+                        status = false,
+                        userId = ""
+                    )
+                    viewModel.updateTask(taskId?: "", taskUpdated, onBackPressed)
+                },
                 backgroundColor = floatingButtonColor
             ) {
                 Icon(painter = painterResource(id = plus), contentDescription = "")
@@ -74,17 +110,21 @@ fun AddTaskScreen(
 
             val padding = Modifier.padding(horizontal = 30.dp)
 
-            var task by remember { mutableStateOf("") }
-            var date by remember { mutableStateOf("") }
-            var time by remember { mutableStateOf("") }
-
             SendToTextField(
-                value = task,
+                value = taskName,
                 onValueChange = { newText ->
-                    task = newText
+                    taskName = newText
                 },
                 modifier = padding.padding(top = 20.dp),
                 textId = R.string.task
+            )
+            SendToTextField(
+                value = description,
+                onValueChange = { newText ->
+                    description = newText
+                },
+                modifier = padding.padding(top = 20.dp),
+                textId = R.string.description
             )
             SendToTextField(
                 value = date,

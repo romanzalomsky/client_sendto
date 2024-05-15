@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -27,7 +26,6 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.Text
@@ -37,7 +35,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -46,8 +43,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zalomsky.client_sendto.R
 import com.zalomsky.client_sendto.features.sends.Send
-import com.zalomsky.client_sendto.features.tasks.Task
 import com.zalomsky.client_sendto.domain.models.Client
+import com.zalomsky.client_sendto.domain.models.Task
 
 
 @Composable
@@ -154,7 +151,7 @@ fun SendToTaskListItem(
         ) {
             Text(
                 modifier = Modifier.padding(5.dp),
-                text = task.name,
+                text = task.taskName,
                 color = textColor,
                 fontFamily = rubiklight,
                 style = TextStyle(fontSize = 16.sp)
@@ -164,7 +161,7 @@ fun SendToTaskListItem(
                 horizontalArrangement = Arrangement.End
             ) {
                 Checkbox(
-                    checked = task.status,
+                    checked = true,
                     onCheckedChange = { /* Обработчик изменения состояния */ },
                     modifier = Modifier.padding(5.dp),
                     colors = CheckboxDefaults.colors(
