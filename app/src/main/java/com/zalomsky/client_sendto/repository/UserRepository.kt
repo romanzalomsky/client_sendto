@@ -11,5 +11,7 @@ class UserRepository @Inject constructor(
 
     suspend fun getLogin(loginRequest: LoginRequest) = userApiService.login(loginRequest = loginRequest)
 
+    suspend fun getUser() = userApiService.getUserInfo()
+
     suspend fun getRegistration(user: User) = userApiService.registration(user = user)
 }
