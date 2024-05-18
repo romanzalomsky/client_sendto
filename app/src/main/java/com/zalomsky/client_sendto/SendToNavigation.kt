@@ -18,8 +18,10 @@ import com.zalomsky.client_sendto.features.base.navigateToAddClientScreen
 import com.zalomsky.client_sendto.features.reg.RegistrationScreen
 import com.zalomsky.client_sendto.features.sends.SendsScreen
 import com.zalomsky.client_sendto.features.sends.addSendsScreen
-import com.zalomsky.client_sendto.features.sends.addressBook.aBScreen
-import com.zalomsky.client_sendto.features.sends.addressBook.navigateToABScreen
+import com.zalomsky.client_sendto.features.sends.book.bookScreen
+import com.zalomsky.client_sendto.features.sends.book.addBookScreen
+import com.zalomsky.client_sendto.features.sends.book.editBookScreen
+import com.zalomsky.client_sendto.features.sends.book.navigateToBookScreen
 import com.zalomsky.client_sendto.features.sends.navigateToAddSendsScreen
 import com.zalomsky.client_sendto.features.tasks.TaskScreen
 import com.zalomsky.client_sendto.features.tasks.addTaskScreen
@@ -45,7 +47,9 @@ fun NavGraphBuilder.sendToNavGraph(
         addTaskScreen(upPress = upPress)
         editTaskScreen(upPress = upPress)
         addSendsScreen(upPress = upPress)
-        aBScreen(upPress = upPress)
+        addBookScreen(upPress = upPress)
+        editBookScreen(upPress = upPress)
+        bookScreen(upPress = upPress, navController)
     }
 }
 
@@ -100,7 +104,7 @@ fun NavGraphBuilder.bottomRoutes(
                 navController.navigateToAddSendsScreen()
             },
             toAddressBook = {
-                navController.navigateToABScreen()
+                navController.navigateToBookScreen()
             }
         )
     }

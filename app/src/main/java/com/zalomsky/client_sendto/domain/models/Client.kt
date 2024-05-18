@@ -9,5 +9,6 @@ data class Client(
     @SerializedName("id") val id: String,
     @SerializedName("email") val email: String,
     @SerializedName("phone") val phone: String,
-    @SerializedName("user_id") val user_id: String,
+    @SerializedName("userId") val userId: String,
+    @SerializedName("bookId") val bookId: String
 )

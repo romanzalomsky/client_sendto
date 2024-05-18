@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.features.base
+package com.zalomsky.client_sendto.features.sends.book
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -29,30 +29,30 @@ import com.zalomsky.client_sendto.common.floatingButtonColor
 import com.zalomsky.client_sendto.common.plus
 import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.whiteColor
-import com.zalomsky.client_sendto.domain.models.Client
+import com.zalomsky.client_sendto.domain.models.Book
+import com.zalomsky.client_sendto.domain.models.Task
+import com.zalomsky.client_sendto.features.sends.book.BookViewModel
+import com.zalomsky.client_sendto.features.tasks.TaskViewModel
 import kotlinx.coroutines.launch
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import java.util.UUID
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AddClientScreen(
-    onBackPressed: () -> Unit,
+fun AddBookScreen(
+    onBackPressed: () -> Unit
 ) {
 
-    val viewModel: BaseViewModel = hiltViewModel()
+    val viewModel: BookViewModel = hiltViewModel()
     val coroutineScope = rememberCoroutineScope()
 
-    var mail by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
+    var bookName by remember { mutableStateOf("") }
+    var bookType by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.addClient),
+                        text = stringResource(id = R.string.addBook),
                         color = whiteColor
                     )
                 },
@@ -60,9 +60,8 @@ fun AddClientScreen(
                 navigationIcon = {
                     IconButton(
                         onClick = onBackPressed
-                    ) {
-                        Icon(
-                            painter = painterResource(id = back),
+                    ){
+                        Icon(painter = painterResource(id = back),
                             tint = whiteColor,
                             contentDescription = ""
                         )
@@ -76,8 +75,13 @@ fun AddClientScreen(
             FloatingActionButton(
                 onClick = {
                     coroutineScope.launch {
-                        val client = Client(id = "", email = mail, phone = phone, userId = "", bookId = "")
-                        viewModel.addClient(client = client, onSuccess = onBackPressed)
+                        val book = Book(
+                            id = "",
+                            bookName = bookName,
+                            bookType = bookType,
+                            userId = ""
+                        )
+                        viewModel.addBook(book, onBackPressed)
                     }
                 },
                 backgroundColor = floatingButtonColor
@@ -95,20 +99,20 @@ fun AddClientScreen(
             val padding = Modifier.padding(horizontal = 30.dp)
 
             SendToTextField(
-                value = mail,
+                value = bookName,
                 onValueChange = { newText ->
-                    mail = newText
+                    bookName = newText
                 },
                 modifier = padding.padding(top = 20.dp),
-                textId = R.string.mail
+                textId = R.string.naming
             )
             SendToTextField(
-                value = phone,
+                value = bookType,
                 onValueChange = { newText ->
-                    phone = newText
+                    bookType = newText
                 },
                 modifier = padding.padding(top = 20.dp),
-                textId = R.string.phone
+                textId = R.string.type
             )
         }
     }
