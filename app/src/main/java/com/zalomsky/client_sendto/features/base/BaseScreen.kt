@@ -3,7 +3,6 @@ package com.zalomsky.client_sendto.features.base
 import android.annotation.SuppressLint
 import android.os.Environment
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,7 +19,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,8 +38,6 @@ import com.zalomsky.client_sendto.common.pdfIcon
 import com.zalomsky.client_sendto.common.rubikMedium
 import com.zalomsky.client_sendto.common.textColor
 import com.zalomsky.client_sendto.domain.models.Client
-import com.zalomsky.client_sendto.features.TokenViewModel
-import com.zalomsky.client_sendto.features.auth.AuthViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -51,8 +47,6 @@ import java.io.File
 fun BaseScreen(
     toAddClientScreen: () -> Unit,
 ) {
-
-    val headerText = " \"ЭйчТиСофт\""
 
     val viewModel: BaseViewModel = hiltViewModel()
     val clients = viewModel.clients.observeAsState(listOf()).value
@@ -89,7 +83,7 @@ fun BaseScreen(
         ) {
 
             Text(
-                text = stringResource(id = R.string.clientBase) + headerText,
+                text = stringResource(id = R.string.clientBase),
                 fontSize = 15.sp,
                 fontWeight = FontWeight(300),
                 color = textColor,

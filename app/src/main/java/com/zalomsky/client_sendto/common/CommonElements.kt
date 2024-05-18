@@ -42,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zalomsky.client_sendto.R
+import com.zalomsky.client_sendto.domain.models.Book
 import com.zalomsky.client_sendto.features.sends.Send
 import com.zalomsky.client_sendto.domain.models.Client
 import com.zalomsky.client_sendto.domain.models.Task
@@ -121,6 +122,44 @@ fun SendToTwoListItem(
                     .padding(top = 2.dp)
                     .padding(horizontal = 5.dp),
                 text = client.phone,
+                color = textColor,
+                fontFamily = rubiklight,
+                style = TextStyle(fontSize = 16.sp)
+
+            )
+        }
+    }
+}
+
+@Composable
+fun SendToTwoListItemNew(
+    book: Book,
+    onClick: () -> Unit
+) {
+    Card(
+        elevation = 0.dp,
+        border = BorderStroke(1.dp, systemColor),
+        shape = RoundedCornerShape(20.dp),
+        modifier = Modifier
+            .padding(5.dp)
+            .padding(horizontal = 20.dp)
+            .fillMaxWidth()
+            .height(70.dp)
+            .clickable(onClick = onClick)
+    ) {
+        Column {
+            Text(
+                modifier = Modifier.padding(5.dp),
+                text = book.bookName,
+                color = textColor,
+                fontFamily = rubiklight,
+                style = TextStyle(fontSize = 16.sp)
+            )
+            Text(
+                modifier = Modifier
+                    .padding(top = 2.dp)
+                    .padding(horizontal = 5.dp),
+                text = book.bookType,
                 color = textColor,
                 fontFamily = rubiklight,
                 style = TextStyle(fontSize = 16.sp)

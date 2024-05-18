@@ -39,6 +39,8 @@
     <string name="countOfGetters">Кол-во получателей</string>
 
     <string name="editTask">Обновить задачу</string>
+    <string name="editBook">Обновить книгу</string>
+    <string name="addBook">Добавить книгу</string>
 
     <string name="add">Добавить</string>
     <string name="sort">Сортировать</string>

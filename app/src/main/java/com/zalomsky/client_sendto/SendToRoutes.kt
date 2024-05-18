@@ -17,8 +17,9 @@ object MainDestinations {
     const val ADD_TASK_ROUTE = "add task"
     const val EDIT_TASK_ROUTE = "edit task"
     const val ADD_SENDS_ROUTE = "add sends"
-    const val AB_ROUTE = "address book"
-    const val ADD_AB_ROUTE = "add address book"
+    const val BOOK_ROUTE = "book"
+    const val ADD_BOOK_ROUTE = "add_book"
+    const val EDIT_BOOK_ROUTE = "edit_book"
 }
 
 enum class BaseSections(

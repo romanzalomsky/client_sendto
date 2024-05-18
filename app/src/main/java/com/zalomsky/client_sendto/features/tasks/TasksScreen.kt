@@ -87,11 +87,8 @@ fun TaskScreen(
                 .padding(top = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            val companyName = " \"ЭйчТиСофт\""
-
             Text(
-                text = stringResource(id = R.string.tasks) + companyName,
+                text = stringResource(id = R.string.tasks),
                 fontSize = 15.sp,
                 fontWeight = FontWeight(300),
                 color = textColor,

@@ -1,10 +1,12 @@
 package com.zalomsky.client_sendto.di
 
+import com.zalomsky.client_sendto.repository.BookRepository
 import com.zalomsky.client_sendto.service.ClientApiService
 import com.zalomsky.client_sendto.service.UserApiService
 import com.zalomsky.client_sendto.repository.ClientRepository
 import com.zalomsky.client_sendto.repository.TaskRepository
 import com.zalomsky.client_sendto.repository.UserRepository
+import com.zalomsky.client_sendto.service.BookApiService
 import com.zalomsky.client_sendto.service.TaskApiService
 import dagger.Module
 import dagger.Provides
@@ -26,4 +28,8 @@ class HiltModule {
     @Provides
     fun provideTaskRepository(taskApiService: TaskApiService): TaskRepository =
         TaskRepository(taskApiService)
+
+    @Provides
+    fun provideBookRepository(bookApiService: BookApiService): BookRepository =
+        BookRepository(bookApiService)
 }

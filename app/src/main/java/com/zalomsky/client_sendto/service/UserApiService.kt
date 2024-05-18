@@ -19,6 +19,9 @@ interface UserApiService {
         @Header("Authorization") token: String,
     ): Response<LoginResponse>
 
+    @GET("/auth/get_user_info")
+    suspend fun getUserInfo(): User? //todo: fix request
+
     @POST("/registration")
     suspend fun registration(@Body user: User): Response<User>
 }

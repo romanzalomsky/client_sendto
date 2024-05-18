@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.zalomsky.client_sendto.service.BookApiService
 import com.zalomsky.client_sendto.service.ClientApiService
 import com.zalomsky.client_sendto.service.TaskApiService
 import com.zalomsky.client_sendto.service.UserApiService
@@ -95,4 +96,12 @@ class SingletonModule {
             .client(okHttpClient)
             .build()
             .create(TaskApiService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideBookApiService(okHttpClient: OkHttpClient, retrofit: Retrofit.Builder): BookApiService =
+        retrofit
+            .client(okHttpClient)
+            .build()
+            .create(BookApiService::class.java)
 }

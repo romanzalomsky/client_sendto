@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.features.base
+package com.zalomsky.client_sendto.features.sends.book
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -11,10 +11,11 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,30 +30,36 @@ import com.zalomsky.client_sendto.common.floatingButtonColor
 import com.zalomsky.client_sendto.common.plus
 import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.whiteColor
-import com.zalomsky.client_sendto.domain.models.Client
-import kotlinx.coroutines.launch
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import java.util.UUID
+import com.zalomsky.client_sendto.domain.models.Book
+import com.zalomsky.client_sendto.domain.models.Task
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AddClientScreen(
-    onBackPressed: () -> Unit,
+fun EditBookScreen(
+    bookId: String?,
+    onBackPressed: () -> Unit
 ) {
+    val viewModel: BookViewModel = hiltViewModel()
+    val book by viewModel.book.collectAsState()
 
-    val viewModel: BaseViewModel = hiltViewModel()
-    val coroutineScope = rememberCoroutineScope()
+    var bookName by remember { mutableStateOf("") }
+    var bookType by remember { mutableStateOf("") }
 
-    var mail by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
+    LaunchedEffect(Unit) {
+        viewModel.getBookById(bookId?: "")
+    }
+
+    if (book != null) {
+        bookName = book?.bookName?: ""
+        bookType = book?.bookType?: ""
+    }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.addClient),
+                        text = stringResource(id = R.string.editBook),
                         color = whiteColor
                     )
                 },
@@ -60,9 +67,8 @@ fun AddClientScreen(
                 navigationIcon = {
                     IconButton(
                         onClick = onBackPressed
-                    ) {
-                        Icon(
-                            painter = painterResource(id = back),
+                    ){
+                        Icon(painter = painterResource(id = back),
                             tint = whiteColor,
                             contentDescription = ""
                         )
@@ -75,10 +81,13 @@ fun AddClientScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    coroutineScope.launch {
-                        val client = Client(id = "", email = mail, phone = phone, userId = "", bookId = "")
-                        viewModel.addClient(client = client, onSuccess = onBackPressed)
-                    }
+                    val bookUpdated = Book(
+                        id = "",
+                        bookName = bookName,
+                        bookType = bookType,
+                        userId = ""
+                    )
+                    viewModel.updateBook(bookId?: "", bookUpdated, onBackPressed)
                 },
                 backgroundColor = floatingButtonColor
             ) {
@@ -95,20 +104,20 @@ fun AddClientScreen(
             val padding = Modifier.padding(horizontal = 30.dp)
 
             SendToTextField(
-                value = mail,
+                value = bookName,
                 onValueChange = { newText ->
-                    mail = newText
+                    bookName = newText
                 },
                 modifier = padding.padding(top = 20.dp),
-                textId = R.string.mail
+                textId = R.string.task
             )
             SendToTextField(
-                value = phone,
+                value = bookType,
                 onValueChange = { newText ->
-                    phone = newText
+                    bookType = newText
                 },
                 modifier = padding.padding(top = 20.dp),
-                textId = R.string.phone
+                textId = R.string.description
             )
         }
     }
