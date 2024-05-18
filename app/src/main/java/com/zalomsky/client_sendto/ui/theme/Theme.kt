@@ -29,7 +29,7 @@ private val LightColorScheme = lightColors(
 )
 
 @Composable
-fun Client_sendtoTheme(
+fun ClientSendToTheme(
     darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) {

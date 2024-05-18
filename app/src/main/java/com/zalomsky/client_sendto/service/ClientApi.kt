@@ -6,11 +6,11 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface ClientApiService {
+interface ClientApi {
 
     @GET("/auth/clients")
-    suspend fun getClients(): List<Client>
+    suspend fun clients(): List<Client>
 
     @POST("/auth/clients/add")
-    suspend fun createClient(@Body client: Client): Response<Client>
+    suspend fun add(@Body client: Client): Response<Client>
 }

@@ -1,7 +1,10 @@
-package com.zalomsky.client_sendto.features.tasks
+package com.zalomsky.client_sendto.features.task.ui
 
 import android.annotation.SuppressLint
-import android.util.Log
+import com.zalomsky.client_sendto.features.task.presentation.TasksState.Initial
+import com.zalomsky.client_sendto.features.task.presentation.TasksState.Loading
+import com.zalomsky.client_sendto.features.task.presentation.TasksState.Content
+import com.zalomsky.client_sendto.features.task.presentation.TasksState.Error
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +26,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
@@ -30,7 +34,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -39,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.zalomsky.client_sendto.R
-import com.zalomsky.client_sendto.common.SendToTaskListItem
 import com.zalomsky.client_sendto.common.floatingButtonColor
 import com.zalomsky.client_sendto.common.plus
 import com.zalomsky.client_sendto.common.rubikMedium
@@ -47,12 +49,29 @@ import com.zalomsky.client_sendto.common.rubiklight
 import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.textColor
 import com.zalomsky.client_sendto.common.whiteColor
-import com.zalomsky.client_sendto.features.base.BaseViewModel
+import com.zalomsky.client_sendto.features.task.presentation.TaskViewModel
+import com.zalomsky.client_sendto.features.task.presentation.TasksState
 import kotlinx.coroutines.launch
+
+// EXAMPLE
+@Composable
+fun TasksScreen() {
+    val viewModel: TaskViewModel = hiltViewModel()
+    val state by viewModel.state.observeAsState() // TODO: replace with collectAsStateWithLifecycle (подтянуть зависимость надо)
+
+    when (state!!) { // !! уберутся когда заменишь на collectAsStateWithLifecycle
+
+        Initial, Loading -> { TODO() }
+
+        is Content       -> { TODO() }
+
+        is Error         -> { TODO() }
+    }
+}
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun TaskScreen(
+fun TaskScreen( // Todo: divide into small, reusable elements
     onTaskAdd: () -> Unit,
     onTaskEdit: (String?) -> Unit
 ) {
@@ -60,11 +79,11 @@ fun TaskScreen(
     val viewModel: TaskViewModel = hiltViewModel()
     val tasks = viewModel.tasks.observeAsState(listOf()).value
 
-    val checkedState = remember { mutableStateMapOf<String, Boolean>() }
-    val scope = rememberCoroutineScope()
+    val checkedState = remember { mutableStateMapOf<String, Boolean>() } // TODO: Move to TasksState
+    val scope = rememberCoroutineScope() // TODO: Delete
 
     LaunchedEffect(Unit) {
-        viewModel.getTasksList()
+        viewModel.loadTasks() // 👍
     }
 
     Scaffold(

@@ -11,14 +11,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import com.zalomsky.client_sendto.common.BottomNavigationBar
-import com.zalomsky.client_sendto.ui.theme.Client_sendtoTheme
+import com.zalomsky.client_sendto.ui.theme.ClientSendToTheme
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
 @Composable
 fun SendToApp() {
-    Client_sendtoTheme {
-
+    ClientSendToTheme {
         val appState = rememberSendToAppState()
 
         Scaffold(

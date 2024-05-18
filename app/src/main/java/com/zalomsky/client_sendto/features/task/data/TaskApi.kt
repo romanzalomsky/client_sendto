@@ -1,6 +1,6 @@
-package com.zalomsky.client_sendto.service
+package com.zalomsky.client_sendto.features.task.data
 
-import com.zalomsky.client_sendto.domain.models.Task
+import com.zalomsky.client_sendto.features.task.domain.Task
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -9,23 +9,23 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
-interface TaskApiService {
+interface TaskApi {
 
     @GET("/auth/tasks")
-    suspend fun getTasks(): List<Task>
+    suspend fun tasks(): List<Task>
 
     @GET("/auth/tasks/{taskId}")
-    suspend fun getTaskById(@Path("taskId") taskId: String): Task?
+    suspend fun getById(@Path("taskId") taskId: String): Task?
 
     @PUT("/auth/tasks/{taskId}")
-    suspend fun updateTask(
+    suspend fun update(
         @Path("taskId") taskId: String,
         @Body task: Task
     ): Response<Task>
 
     @POST("/auth/tasks/add")
-    suspend fun createTask(@Body task: Task): Response<Task>
+    suspend fun add(@Body task: Task): Response<Task>
 
     @DELETE("/auth/tasks/{taskId}")
-    suspend fun deleteTask(@Path("taskId") taskId: String)
+    suspend fun delete(@Path("taskId") taskId: String)
 }

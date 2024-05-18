@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.domain.models
+package com.zalomsky.client_sendto.features.task.domain
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable

@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.zalomsky.client_sendto.service.ClientApiService
-import com.zalomsky.client_sendto.service.TaskApiService
-import com.zalomsky.client_sendto.service.UserApiService
+import com.zalomsky.client_sendto.service.ClientApi
+import com.zalomsky.client_sendto.features.task.data.TaskApi
+import com.zalomsky.client_sendto.service.UserApi
 import com.zalomsky.client_sendto.utils.PreferenceManager
 import com.zalomsky.client_sendto.utils.TokenManager
 import dagger.Module
@@ -19,7 +19,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 
@@ -75,24 +74,16 @@ class SingletonModule {
 
     @Singleton
     @Provides
-    fun provideUserApiService(retrofit: Retrofit.Builder): UserApiService =
+    fun provideUserApiService(retrofit: Retrofit.Builder): UserApi =
         retrofit
             .build()
-            .create(UserApiService::class.java)
+            .create(UserApi::class.java)
 
     @Singleton
     @Provides
-    fun provideClientApiService(okHttpClient: OkHttpClient, retrofit: Retrofit.Builder): ClientApiService =
+    fun provideClientApiService(okHttpClient: OkHttpClient, retrofit: Retrofit.Builder): ClientApi =
         retrofit
             .client(okHttpClient)
             .build()
-            .create(ClientApiService::class.java)
-
-    @Singleton
-    @Provides
-    fun provideTaskApiService(okHttpClient: OkHttpClient, retrofit: Retrofit.Builder): TaskApiService =
-        retrofit
-            .client(okHttpClient)
-            .build()
-            .create(TaskApiService::class.java)
+            .create(ClientApi::class.java)
 }

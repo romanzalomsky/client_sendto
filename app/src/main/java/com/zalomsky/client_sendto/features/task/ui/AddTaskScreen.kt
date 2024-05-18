@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.features.tasks
+package com.zalomsky.client_sendto.features.task.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -11,11 +11,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,40 +29,30 @@ import com.zalomsky.client_sendto.common.floatingButtonColor
 import com.zalomsky.client_sendto.common.plus
 import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.whiteColor
-import com.zalomsky.client_sendto.domain.models.Task
+import com.zalomsky.client_sendto.features.task.presentation.TaskViewModel
+import com.zalomsky.client_sendto.features.task.domain.Task
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun EditTaskScreen(
-    taskId: String?,
+fun AddTaskScreen(
     onBackPressed: () -> Unit
 ) {
 
     val viewModel: TaskViewModel = hiltViewModel()
-    val task by viewModel.task.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
     var taskName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var date by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("") }
 
-    LaunchedEffect(Unit) {
-        viewModel.getTaskById(taskId?: "")
-    }
-
-    if (task != null) {
-        taskName = task?.taskName?: ""
-        description = task?.description?: ""
-        date = task?.date?: ""
-        time = task?.time?: ""
-    }
-
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.editTask),
+                        text = stringResource(id = R.string.addTask),
                         color = whiteColor
                     )
                 },
@@ -85,16 +74,18 @@ fun EditTaskScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    val taskUpdated = Task(
-                        id = "",
-                        taskName = taskName,
-                        description = description,
-                        date = date,
-                        time = time,
-                        status = false,
-                        userId = ""
-                    )
-                    viewModel.updateTask(taskId?: "", taskUpdated, onBackPressed)
+                      coroutineScope.launch {
+                          val task = Task(
+                              id = "",
+                              taskName = taskName,
+                              description = description,
+                              date = date,
+                              time = time,
+                              status = false,
+                              userId = ""
+                          )
+                          viewModel.addTask(task, onBackPressed)
+                      }
                 },
                 backgroundColor = floatingButtonColor
             ) {
