@@ -34,7 +34,6 @@ import com.zalomsky.client_sendto.features.task.presentation.TaskViewModel
 import com.zalomsky.client_sendto.features.task.domain.Task
 import kotlinx.coroutines.launch
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AddTaskScreen(onBackPressed: () -> Unit) {
     val taskDetailsViewModel: TaskDetailsViewModel = hiltViewModel()
@@ -85,6 +84,7 @@ fun AddTaskScreen(onBackPressed: () -> Unit) {
     ) {
         TaskDetails(
             state = taskDetailsState,
+            modifier = Modifier.padding(it),
             onNameChanged = taskDetailsViewModel::changeName,
             onDescriptionChanged = taskDetailsViewModel::changeDescription,
             onDateChanged = taskDetailsViewModel::changeDate,

@@ -1,6 +1,7 @@
 package com.zalomsky.client_sendto.features.task.details.presentation
 
 import androidx.lifecycle.ViewModel
+import com.zalomsky.client_sendto.features.task.domain.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,6 +14,15 @@ class TaskDetailsViewModel @Inject constructor() : ViewModel() {
 
     private val _state: MutableStateFlow<TaskDetailsState> = MutableStateFlow(TaskDetailsState())
     val state: StateFlow<TaskDetailsState> = _state.asStateFlow()
+
+    fun setupInitialValues(task: Task) {
+        _state.value = TaskDetailsState(
+            name = task.taskName,
+            description = task.description,
+            date = task.date,
+            time = task.time
+        )
+    }
 
     fun changeName(newValue: String) {
         _state.update {

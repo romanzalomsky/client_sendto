@@ -21,7 +21,7 @@ import com.zalomsky.client_sendto.features.sends.addSendsScreen
 import com.zalomsky.client_sendto.features.sends.addressBook.aBScreen
 import com.zalomsky.client_sendto.features.sends.addressBook.navigateToABScreen
 import com.zalomsky.client_sendto.features.sends.navigateToAddSendsScreen
-import com.zalomsky.client_sendto.features.task.overview.ui.TaskScreen
+import com.zalomsky.client_sendto.features.task.overview.ui.TasksOverviewScreen
 import com.zalomsky.client_sendto.features.task.addTaskScreen
 import com.zalomsky.client_sendto.features.task.editTaskScreen
 import com.zalomsky.client_sendto.features.task.navigateToAddTaskScreen
@@ -85,7 +85,7 @@ fun NavGraphBuilder.bottomRoutes(
         )
     }
     composable(BaseSections.TASKS.route) {
-        TaskScreen(
+        TasksOverviewScreen(
             navigateToAddTask = {
                 navController.navigateToAddTaskScreen()
             },

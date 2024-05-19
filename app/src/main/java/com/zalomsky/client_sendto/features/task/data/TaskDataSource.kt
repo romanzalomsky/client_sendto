@@ -10,7 +10,7 @@ class TaskDataSource @Inject constructor(
 
     suspend fun get(): List<Task> = taskApi.tasks()
 
-    suspend fun getById(id: String): Task? = taskApi.getById(id)
+    suspend fun getById(id: String): Task = taskApi.getById(id)
 
     suspend fun update(taskId: String, task: Task): Response<Task> = taskApi.update(taskId, task)
 

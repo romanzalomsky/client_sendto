@@ -15,13 +15,14 @@ import com.zalomsky.client_sendto.features.task.domain.Task
 @Composable
 fun TaskDetails(
     state: TaskDetailsState,
+    modifier: Modifier = Modifier,
     onNameChanged: (String) -> Unit,
     onDescriptionChanged: (String) -> Unit,
     onDateChanged: (String) -> Unit,
     onTimeChanged: (String) -> Unit,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(top = 70.dp, start = 30.dp, end = 30.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)

@@ -46,6 +46,7 @@ import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.textColor
 import com.zalomsky.client_sendto.common.whiteColor
 import com.zalomsky.client_sendto.design.CircularProgressLoadingScreen
+import com.zalomsky.client_sendto.design.ErrorScreen
 import com.zalomsky.client_sendto.features.task.domain.Task
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewViewModel
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewState.Initial
@@ -55,7 +56,7 @@ import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverv
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun TaskScreen(
+fun TasksOverviewScreen(
     navigateToAddTask: () -> Unit,
     navigateToEditTask: (String?) -> Unit
 ) {
@@ -110,7 +111,7 @@ fun TaskScreen(
                 onTaskChecked = viewModel::deleteTask,
             )
 
-            is Error -> Error(
+            is Error -> ErrorScreen(
                 message = currentState.message,
                 onReloadClicked = viewModel::loadTasks
             )
@@ -184,21 +185,6 @@ private fun TaskItem(
                     )
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun Error(message: String, onReloadClicked: () -> Unit) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Error loading tasks: $message")
-
-        TextButton(onClick = onReloadClicked) {
-            Text(text = "Reload tasks")
         }
     }
 }
