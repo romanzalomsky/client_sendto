@@ -86,10 +86,10 @@ fun NavGraphBuilder.bottomRoutes(
     }
     composable(BaseSections.TASKS.route) {
         TaskScreen(
-            onTaskAdd = {
+            navigateToAddTask = {
                 navController.navigateToAddTaskScreen()
             },
-            onTaskEdit = { taskId ->
+            navigateToEditTask = { taskId ->
                 navController.navigateToEditTaskScreen(taskId?: "")
             }
         )
