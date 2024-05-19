@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.sp
 import com.zalomsky.client_sendto.R
 import com.zalomsky.client_sendto.features.sends.Send
 import com.zalomsky.client_sendto.domain.models.Client
-import com.zalomsky.client_sendto.features.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.domain.Task
 
 
 @Composable

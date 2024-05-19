@@ -1,9 +1,7 @@
-package com.zalomsky.client_sendto.features.task.edit
+package com.zalomsky.client_sendto.features.task.edit.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -12,21 +10,17 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zalomsky.client_sendto.R
-import com.zalomsky.client_sendto.common.SendToTextField
 import com.zalomsky.client_sendto.common.back
 import com.zalomsky.client_sendto.common.floatingButtonColor
 import com.zalomsky.client_sendto.common.plus
@@ -36,8 +30,8 @@ import com.zalomsky.client_sendto.design.CircularProgressLoadingScreen
 import com.zalomsky.client_sendto.design.ErrorScreen
 import com.zalomsky.client_sendto.features.task.details.presentation.TaskDetailsViewModel
 import com.zalomsky.client_sendto.features.task.details.ui.TaskDetails
-import com.zalomsky.client_sendto.features.task.presentation.TaskViewModel
-import com.zalomsky.client_sendto.features.task.domain.Task
+import com.zalomsky.client_sendto.features.task.edit.presentation.EditTaskState
+import com.zalomsky.client_sendto.features.task.edit.presentation.EditTaskViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable

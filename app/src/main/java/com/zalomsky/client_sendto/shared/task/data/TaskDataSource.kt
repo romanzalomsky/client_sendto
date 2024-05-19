@@ -1,6 +1,6 @@
-package com.zalomsky.client_sendto.features.task.data
+package com.zalomsky.client_sendto.shared.task.data
 
-import com.zalomsky.client_sendto.features.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.domain.Task
 import retrofit2.Response
 import javax.inject.Inject
 

@@ -1,9 +1,9 @@
-package com.zalomsky.client_sendto.features.task.edit
+package com.zalomsky.client_sendto.features.task.edit.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zalomsky.client_sendto.features.task.domain.usecase.GetTaskByIdUseCase
-import com.zalomsky.client_sendto.features.task.domain.usecase.UpdateTaskUseCase
+import com.zalomsky.client_sendto.shared.task.domain.usecase.GetTaskByIdUseCase
+import com.zalomsky.client_sendto.shared.task.domain.usecase.UpdateTaskUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

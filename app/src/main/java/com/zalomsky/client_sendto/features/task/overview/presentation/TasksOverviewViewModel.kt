@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zalomsky.client_sendto.features.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.domain.Task
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewState.Initial
-import com.zalomsky.client_sendto.features.task.domain.usecase.GetAllTasksUseCase
-import com.zalomsky.client_sendto.features.task.domain.usecase.GetTaskByIdUseCase
+import com.zalomsky.client_sendto.shared.task.domain.usecase.GetAllTasksUseCase
+import com.zalomsky.client_sendto.shared.task.domain.usecase.GetTaskByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

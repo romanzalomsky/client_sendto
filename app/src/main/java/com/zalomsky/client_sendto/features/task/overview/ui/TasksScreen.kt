@@ -21,7 +21,6 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -47,7 +46,7 @@ import com.zalomsky.client_sendto.common.textColor
 import com.zalomsky.client_sendto.common.whiteColor
 import com.zalomsky.client_sendto.design.CircularProgressLoadingScreen
 import com.zalomsky.client_sendto.design.ErrorScreen
-import com.zalomsky.client_sendto.features.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.domain.Task
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewViewModel
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewState.Initial
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewState.Loading

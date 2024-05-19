@@ -1,6 +1,6 @@
 package com.zalomsky.client_sendto.features.task.overview.presentation
 
-import com.zalomsky.client_sendto.features.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.domain.Task
 
 sealed interface TasksOverviewState {
 
