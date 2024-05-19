@@ -15,7 +15,7 @@ interface TaskApi {
     suspend fun tasks(): List<Task>
 
     @GET("/auth/tasks/{taskId}")
-    suspend fun getById(@Path("taskId") taskId: String): Task?
+    suspend fun getById(@Path("taskId") taskId: String): Task
 
     @PUT("/auth/tasks/{taskId}")
     suspend fun update(

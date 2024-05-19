@@ -6,4 +6,4 @@ import javax.inject.Inject
 
 class GetTaskByIdUseCase @Inject constructor(
     taskDataSource: TaskDataSource
-) : suspend (String) -> Task? by taskDataSource::getById
+) : suspend (String) -> Task by taskDataSource::getById
