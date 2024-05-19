@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.zalomsky.client_sendto.MainDestinations
 import com.zalomsky.client_sendto.defaultNavOptions
-import com.zalomsky.client_sendto.features.task.ui.AddTaskScreen
+import com.zalomsky.client_sendto.features.task.add.AddTaskScreen
 import com.zalomsky.client_sendto.features.task.ui.EditTaskScreen
 
 // TODO: store route names in corresponding packages/modules

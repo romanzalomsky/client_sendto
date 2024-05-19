@@ -36,6 +36,7 @@ class TasksOverviewViewModel @Inject constructor(
                 _state.value = TasksOverviewState.Content(tasks = it)
             }.onFailure {
                 Log.e(TAG, "loadTasks error: ", it)
+                _state.value = TasksOverviewState.Error(message = it.message.orEmpty())
             }
         }
     }

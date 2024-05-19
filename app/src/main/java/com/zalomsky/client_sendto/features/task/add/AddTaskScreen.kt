@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.features.task.ui
+package com.zalomsky.client_sendto.features.task.add
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zalomsky.client_sendto.R
 import com.zalomsky.client_sendto.common.SendToTextField
 import com.zalomsky.client_sendto.common.back
@@ -29,23 +30,19 @@ import com.zalomsky.client_sendto.common.floatingButtonColor
 import com.zalomsky.client_sendto.common.plus
 import com.zalomsky.client_sendto.common.systemColor
 import com.zalomsky.client_sendto.common.whiteColor
+import com.zalomsky.client_sendto.features.task.details.presentation.TaskDetailsViewModel
+import com.zalomsky.client_sendto.features.task.details.ui.TaskDetails
 import com.zalomsky.client_sendto.features.task.presentation.TaskViewModel
 import com.zalomsky.client_sendto.features.task.domain.Task
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AddTaskScreen(
-    onBackPressed: () -> Unit
-) {
+fun AddTaskScreen(onBackPressed: () -> Unit) {
+    val taskDetailsViewModel: TaskDetailsViewModel = hiltViewModel()
+    val viewModel: AddTaskViewModel = hiltViewModel()
 
-    val viewModel: TaskViewModel = hiltViewModel()
-    val coroutineScope = rememberCoroutineScope()
-
-    var taskName by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var date by remember { mutableStateOf("") }
-    var time by remember { mutableStateOf("") }
+    val taskDetailsState by taskDetailsViewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -60,8 +57,9 @@ fun AddTaskScreen(
                 navigationIcon = {
                     IconButton(
                         onClick = onBackPressed
-                    ){
-                        Icon(painter = painterResource(id = back),
+                    ) {
+                        Icon(
+                            painter = painterResource(id = back),
                             tint = whiteColor,
                             contentDescription = ""
                         )
@@ -74,18 +72,12 @@ fun AddTaskScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                      coroutineScope.launch {
-                          val task = Task(
-                              id = "",
-                              taskName = taskName,
-                              description = description,
-                              date = date,
-                              time = time,
-                              status = false,
-                              userId = ""
-                          )
-                          viewModel.addTask(task, onBackPressed)
-                      }
+                    viewModel.createTask(
+                        name = taskDetailsState.name,
+                        description = taskDetailsState.description,
+                        date = taskDetailsState.date,
+                        time = taskDetailsState.time
+                    )
                 },
                 backgroundColor = floatingButtonColor
             ) {
@@ -93,46 +85,12 @@ fun AddTaskScreen(
             }
         }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 70.dp)
-        ) {
-
-            val padding = Modifier.padding(horizontal = 30.dp)
-
-            SendToTextField(
-                value = taskName,
-                onValueChange = { newText ->
-                    taskName = newText
-                },
-                modifier = padding.padding(top = 20.dp),
-                textId = R.string.task
-            )
-            SendToTextField(
-                value = description,
-                onValueChange = { newText ->
-                    description = newText
-                },
-                modifier = padding.padding(top = 20.dp),
-                textId = R.string.description
-            )
-            SendToTextField(
-                value = date,
-                onValueChange = { newText ->
-                    date = newText
-                },
-                modifier = padding.padding(top = 20.dp),
-                textId = R.string.date
-            )
-            SendToTextField(
-                value = time,
-                onValueChange = { newText ->
-                    time = newText
-                },
-                modifier = padding.padding(top = 20.dp),
-                textId = R.string.time
-            )
-        }
+        TaskDetails(
+            state = taskDetailsState,
+            onNameChanged = taskDetailsViewModel::changeName,
+            onDescriptionChanged = taskDetailsViewModel::changeDescription,
+            onDateChanged = taskDetailsViewModel::changeDate,
+            onTimeChanged = taskDetailsViewModel::changeTime
+        )
     }
 }

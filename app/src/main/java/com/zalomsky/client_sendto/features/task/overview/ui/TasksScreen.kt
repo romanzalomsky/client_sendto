@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.features.task.ui
+package com.zalomsky.client_sendto.features.task.overview.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
@@ -21,6 +21,7 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -50,6 +51,7 @@ import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverv
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewState.Initial
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewState.Loading
 import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewState.Content
+import com.zalomsky.client_sendto.features.task.overview.presentation.TasksOverviewState.Error
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -102,10 +104,15 @@ fun TaskScreen(
 
             Initial, Loading -> CircularProgressLoadingScreen()
 
-            is Content       -> Content(
+            is Content -> Content(
                 tasks = currentState.tasks,
                 onTaskClicked = navigateToEditTask,
                 onTaskChecked = viewModel::deleteTask,
+            )
+
+            is Error -> Error(
+                message = currentState.message,
+                onReloadClicked = viewModel::loadTasks
             )
         }
     }
@@ -177,6 +184,21 @@ private fun TaskItem(
                     )
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun Error(message: String, onReloadClicked: () -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Error loading tasks: $message")
+
+        TextButton(onClick = onReloadClicked) {
+            Text(text = "Reload tasks")
         }
     }
 }
