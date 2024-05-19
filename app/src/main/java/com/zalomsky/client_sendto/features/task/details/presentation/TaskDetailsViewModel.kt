@@ -1,7 +1,7 @@
 package com.zalomsky.client_sendto.features.task.details.presentation
 
 import androidx.lifecycle.ViewModel
-import com.zalomsky.client_sendto.features.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.domain.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

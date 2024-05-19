@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.zalomsky.client_sendto.R
 import com.zalomsky.client_sendto.common.SendToTextField
 import com.zalomsky.client_sendto.features.task.details.presentation.TaskDetailsState
-import com.zalomsky.client_sendto.features.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.domain.Task
 
 @Composable
 fun TaskDetails(

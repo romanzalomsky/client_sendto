@@ -3,9 +3,9 @@ package com.zalomsky.client_sendto.di
 import com.zalomsky.client_sendto.service.ClientApi
 import com.zalomsky.client_sendto.service.UserApi
 import com.zalomsky.client_sendto.repository.ClientDataSource
-import com.zalomsky.client_sendto.features.task.data.TaskDataSource
+import com.zalomsky.client_sendto.shared.task.data.TaskDataSource
 import com.zalomsky.client_sendto.repository.UserDataSource
-import com.zalomsky.client_sendto.features.task.data.TaskApi
+import com.zalomsky.client_sendto.shared.task.data.TaskApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

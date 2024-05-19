@@ -1,7 +1,7 @@
-package com.zalomsky.client_sendto.features.task.domain.usecase
+package com.zalomsky.client_sendto.shared.task.domain.usecase
 
-import com.zalomsky.client_sendto.features.task.domain.Task
-import com.zalomsky.client_sendto.features.task.data.TaskDataSource
+import com.zalomsky.client_sendto.shared.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.data.TaskDataSource
 import retrofit2.Response
 import javax.inject.Inject
 

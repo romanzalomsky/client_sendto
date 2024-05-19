@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.zalomsky.client_sendto.service.ClientApi
-import com.zalomsky.client_sendto.features.task.data.TaskApi
+import com.zalomsky.client_sendto.shared.task.data.TaskApi
 import com.zalomsky.client_sendto.service.UserApi
 import com.zalomsky.client_sendto.utils.PreferenceManager
 import com.zalomsky.client_sendto.utils.TokenManager

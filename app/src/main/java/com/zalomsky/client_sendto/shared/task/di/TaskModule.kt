@@ -1,7 +1,7 @@
-package com.zalomsky.client_sendto.features.task.di
+package com.zalomsky.client_sendto.shared.task.di
 
-import com.zalomsky.client_sendto.features.task.data.TaskApi
-import com.zalomsky.client_sendto.features.task.data.TaskDataSource
+import com.zalomsky.client_sendto.shared.task.data.TaskApi
+import com.zalomsky.client_sendto.shared.task.data.TaskDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

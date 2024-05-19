@@ -4,8 +4,8 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zalomsky.client_sendto.features.task.domain.Task
-import com.zalomsky.client_sendto.features.task.domain.usecase.AddTaskUseCase
+import com.zalomsky.client_sendto.shared.task.domain.Task
+import com.zalomsky.client_sendto.shared.task.domain.usecase.AddTaskUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.UUID
