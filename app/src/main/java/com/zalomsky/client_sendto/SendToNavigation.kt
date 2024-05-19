@@ -33,7 +33,7 @@ fun NavGraphBuilder.sendToNavGraph(
 ) {
     navigation(
         route = MainDestinations.START_ROUTE,
-        startDestination = MainDestinations.AUTH_ROUTE,
+        startDestination = BaseSections.TASKS.route,
     ) {
         otherRoutes(
             navController = navController
@@ -86,10 +86,10 @@ fun NavGraphBuilder.bottomRoutes(
     }
     composable(BaseSections.TASKS.route) {
         TaskScreen(
-            onTaskAdd = {
+            navigateToAddTask = {
                 navController.navigateToAddTaskScreen()
             },
-            onTaskEdit = { taskId ->
+            navigateToEditTask = { taskId ->
                 navController.navigateToEditTaskScreen(taskId?: "")
             }
         )
