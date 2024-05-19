@@ -9,4 +9,6 @@ sealed interface TasksOverviewState {
     data object Loading : TasksOverviewState
 
     data class Content(val tasks: List<Task>) : TasksOverviewState
+
+    data class Error(val message: String) : TasksOverviewState
 }
