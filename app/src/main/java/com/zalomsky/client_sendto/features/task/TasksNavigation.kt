@@ -1,4 +1,4 @@
-package com.zalomsky.client_sendto.features.tasks
+package com.zalomsky.client_sendto.features.task
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -7,6 +7,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.zalomsky.client_sendto.MainDestinations
 import com.zalomsky.client_sendto.defaultNavOptions
+import com.zalomsky.client_sendto.features.task.add.ui.AddTaskScreen
+import com.zalomsky.client_sendto.features.task.edit.ui.EditTaskScreen
+
+// TODO: store route names in corresponding packages/modules
+const val TASKS_ROUTE = "tasks"
+const val TASK_ADD_ROUTE = "task_add"
+const val TASK_EDIT_ROUTE = "task_edit"
 
 fun NavController.navigateToAddTaskScreen() =
     navigate(MainDestinations.ADD_TASK_ROUTE, defaultNavOptions())
